@@ -2,10 +2,10 @@ package wrapper
 
 import "testing"
 
-func TestText2Imgapi(t *testing.T) {
+func TestText2Img(t *testing.T) {
 	c := NewWrapperClient()
 	c.SetAPIUrl("http://192.168.1.99:7860")
-	result, err := c.Text2Imgapi("maltese puppy")
+	result, err := c.Text2Img("maltese puppy")
 	if err != nil {
 		t.Fatal(err)
 	}

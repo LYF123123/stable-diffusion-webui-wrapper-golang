@@ -51,7 +51,7 @@ func (c *WrapperClient) SetProxy(proxyUrl string) error {
 	return with base64encode image
 */
 
-func (c *WrapperClient) Text2Imgapi(prompt string) (string, error) {
+func (c *WrapperClient) Text2Img(prompt string) (string, error) {
 	defaultPayload := getDefaultDataTXT2IMGReq()
 	defaultPayload.Prompt = defaultPayload.Prompt + prompt
 	b, err := json.Marshal(defaultPayload)
