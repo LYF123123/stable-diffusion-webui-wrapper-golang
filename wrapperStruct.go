@@ -36,6 +36,13 @@ type SDModel struct {
 	Config    string  `json:"config"`
 }
 
+//Hypernetworks Resp
+type Hypernetworks []Hypernetwork
+type Hypernetwork struct {
+	Name string `json:"name"`
+	Path string `json:"path"`
+}
+
 //Face Restorers resp
 type FaceRestorers []FaceRestorer
 

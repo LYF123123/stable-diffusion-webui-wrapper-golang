@@ -146,7 +146,7 @@ func (c *WrapperClient) GetFaceRestorers() (FaceRestorers, error) {
 /*
 Get Embeddings
 */
-func (c *WrapperClient)GetEmbeddings()(Embeddings,error){
+func (c *WrapperClient) GetEmbeddings() (Embeddings, error) {
 	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/embeddings")
 	if err != nil {
 		return Embeddings{}, err
@@ -156,4 +156,19 @@ func (c *WrapperClient)GetEmbeddings()(Embeddings,error){
 	embeddings := Embeddings{}
 	err = json.Unmarshal(body, &embeddings)
 	return embeddings, err
+}
+
+/*
+Get Hypernetworks
+*/
+func (c *WrapperClient) GetHypernetworks() (Hypernetworks, error) {
+	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/hypernetworks")
+	if err != nil {
+		return Hypernetworks{}, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	hypernetworks := Hypernetworks{}
+	err = json.Unmarshal(body, &hypernetworks)
+	return hypernetworks, err
 }

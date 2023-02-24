@@ -71,3 +71,13 @@ func TestGetEmbedding(t *testing.T) {
 	}
 	t.Log(result)
 }
+
+func TestGetHypernetworks(t *testing.T){
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.GetHypernetworks()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result)
+}
