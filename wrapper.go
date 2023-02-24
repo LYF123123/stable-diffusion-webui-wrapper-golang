@@ -20,6 +20,10 @@ func NewWrapperClient() *WrapperClient {
 	}
 }
 
+/*
+	set the api endpoint url
+	eg. http://127.0.0.1:7860
+*/
 func (c *WrapperClient) SetAPIUrl(apiUrl string) error {
 	_, err := url.ParseRequestURI(apiUrl)
 	if err != nil { // the api url is wrong
@@ -29,6 +33,11 @@ func (c *WrapperClient) SetAPIUrl(apiUrl string) error {
 	return nil
 }
 
+/*
+	set proxy
+	eg. http://127.0.0.1:8080
+*/
+
 func (c *WrapperClient) SetProxy(proxyUrl string) error {
 	proxy, err := url.ParseRequestURI(proxyUrl)
 	if err != nil {
@@ -37,6 +46,11 @@ func (c *WrapperClient) SetProxy(proxyUrl string) error {
 	c.Client.Transport = &http.Transport{Proxy: http.ProxyURL(proxy)}
 	return nil
 }
+
+/*
+	set prompt, split with ",".
+	return with base64encode image
+*/
 
 func (c *WrapperClient) Text2Imgapi(prompt string) (string, error) {
 	defaultPayload := getDefaultDataTXT2IMGReq()
@@ -55,5 +69,5 @@ func (c *WrapperClient) Text2Imgapi(prompt string) (string, error) {
 	body, _ := ioutil.ReadAll(resp.Body)
 	res:=tXT2IMGResp{}
 	err=json.Unmarshal(body,&res)
-	return resp.Proto,err
+	return res.Images[0],err
 }
