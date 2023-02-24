@@ -22,7 +22,7 @@ func TestGetMemory(t *testing.T) {
 	t.Log(result)
 }
 
-func TestGetSdModels(t *testing.T){
+func TestGetSdModels(t *testing.T) {
 	c := NewWrapperClient()
 	c.SetAPIUrl("http://192.168.1.99:7860")
 	result, err := c.GetSdModels()
@@ -32,7 +32,7 @@ func TestGetSdModels(t *testing.T){
 	t.Log(result)
 }
 
-func TestGetPromptStyles(t *testing.T){
+func TestGetPromptStyles(t *testing.T) {
 	c := NewWrapperClient()
 	c.SetAPIUrl("http://192.168.1.99:7860")
 	result, err := c.GetPromptStyles()
@@ -52,10 +52,30 @@ func TestGetRealesrganModels(t *testing.T) {
 	t.Log(result)
 }
 
-func TestGetFaceRestorers(t *testing.T){
+func TestGetFaceRestorers(t *testing.T) {
 	c := NewWrapperClient()
 	c.SetAPIUrl("http://192.168.1.99:7860")
 	result, err := c.GetFaceRestorers()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result)
+}
+
+func TestGetEmbedding(t *testing.T) {
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.GetEmbeddings()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result)
+}
+
+func TestGetHypernetworks(t *testing.T){
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.GetHypernetworks()
 	if err != nil {
 		t.Fatal(err)
 	}
