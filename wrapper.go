@@ -145,6 +145,7 @@ func (c *WrapperClient) GetFaceRestorers() (FaceRestorers, error) {
 
 /*
 Get Embeddings
+!Not stable
 */
 func (c *WrapperClient) GetEmbeddings() (Embeddings, error) {
 	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/embeddings")
@@ -176,7 +177,7 @@ func (c *WrapperClient) GetHypernetworks() (Hypernetworks, error) {
 /*
 Get Upscalers
 */
-func (c *WrapperClient)GetUpscalers()(Upscalers,error){
+func (c *WrapperClient) GetUpscalers() (Upscalers, error) {
 	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/upscalers")
 	if err != nil {
 		return Upscalers{}, err
@@ -186,4 +187,105 @@ func (c *WrapperClient)GetUpscalers()(Upscalers,error){
 	upscalers := Upscalers{}
 	err = json.Unmarshal(body, &upscalers)
 	return upscalers, err
+}
+
+/*
+Get Cmd Flags
+*/
+func (c *WrapperClient) GetCmdFlags() (CmdFlags, error) {
+	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/cmd-flags")
+	if err != nil {
+		return CmdFlags{}, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	cmdFlags := CmdFlags{}
+	err = json.Unmarshal(body, &cmdFlags)
+	return cmdFlags, err
+}
+
+//!!! Not implemented yet.
+
+func (c *WrapperClient) FetchFile() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) TrainHypernetwork() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) TrainEmbedding() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) Preprocess() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) CreateHypernetwork() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) CreateEmbedding() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) RefreshCheckpoints() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) GetSamples() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) SetConfig() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) GetConifg() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) Skip() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) Interrupt() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient) Interrogate() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient)Progress() {
+	panic("not implemented")
+}
+
+func (c *WrapperClient)PngInfo(){
+	panic("not implemented")
+}
+
+func (c *WrapperClient)ExtrasBatchImages(){
+	panic("not implemented")
+}
+
+func (c *WrapperClient)ExtrasSingleImage(){
+	panic("not implemented")
+}
+
+func (c *WrapperClient)Img2Img(){
+	panic("not implemented")
+}
+
+func (c *WrapperClient)RobotsTxt(){
+	panic("not implemented")
+}
+
+func (c *WrapperClient)StartupEvents(){
+	panic("not implemented")
+}
+
+func (c *WrapperClient)GetQueueStatus(){
+	panic("not implemented")
 }

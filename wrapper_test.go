@@ -91,3 +91,13 @@ func TestGetUpscalers(t *testing.T) {
 	}
 	t.Log(result)
 }
+
+func TestGetCmdFlags(t *testing.T) {
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.GetCmdFlags()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result)
+}
