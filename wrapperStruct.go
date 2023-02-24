@@ -1,7 +1,6 @@
 package wrapper
 
 // TXT2IMG Req
-
 type TXT2IMGReq struct {
 	Prompt string `json:"prompt"`
 	Steps  int64  `json:"steps"`
@@ -26,7 +25,6 @@ type TXT2IMGResp struct {
 }
 
 // Sd Models resp
-
 type SDModels []SDModel
 
 type SDModel struct {
@@ -38,18 +36,35 @@ type SDModel struct {
 	Config    string  `json:"config"`
 }
 
+//Face Restorers resp
+type FaceRestorers []FaceRestorer
+
+type FaceRestorer struct {
+    Name   string  `json:"name"`   
+    CmdDir *string `json:"cmd_dir"`
+}
+
+
+// Realesrgan Models resp
+type RealesrganModels []RealesrganModel
+
+type RealesrganModel struct {
+	Name  string `json:"name"`
+	Path  string `json:"path"`
+	Scale int64  `json:"scale"`
+}
+
 // Prompt Styles resp
 
 type PromptStyles []PromptStyle
 
 type PromptStyle struct {
-	Name string `json:"name"`
-	Prompt string `json:"prompt"`
+	Name           string `json:"name"`
+	Prompt         string `json:"prompt"`
 	NegativePrompt string `json:"negative_prompt"`
 }
 
 // Memory Resp
-
 type MemStatus struct {
 	RAM  RAM  `json:"ram"`
 	Cuda Cuda `json:"cuda"`

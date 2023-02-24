@@ -41,3 +41,23 @@ func TestGetPromptStyles(t *testing.T){
 	}
 	t.Log(result)
 }
+
+func TestGetRealesrganModels(t *testing.T) {
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.GetRealesrganModels()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result)
+}
+
+func TestGetFaceRestorers(t *testing.T){
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.GetFaceRestorers()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result)
+}
