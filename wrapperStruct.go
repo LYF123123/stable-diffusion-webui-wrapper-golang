@@ -30,8 +30,8 @@ type SDModels []SDModel
 type SDModel struct {
 	Title     string  `json:"title"`
 	ModelName string  `json:"model_name"`
-	Hash      *string `json:"hash"`
-	Sha256    *string `json:"sha256"`
+	Hash      string `json:"hash"`
+	Sha256    string `json:"sha256"`
 	Filename  string  `json:"filename"`
 	Config    string  `json:"config"`
 }
@@ -48,7 +48,7 @@ type FaceRestorers []FaceRestorer
 
 type FaceRestorer struct {
 	Name   string  `json:"name"`
-	CmdDir *string `json:"cmd_dir"`
+	CmdDir string `json:"cmd_dir"`
 }
 
 // Realesrgan Models resp
