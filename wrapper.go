@@ -172,3 +172,18 @@ func (c *WrapperClient) GetHypernetworks() (Hypernetworks, error) {
 	err = json.Unmarshal(body, &hypernetworks)
 	return hypernetworks, err
 }
+
+/*
+Get Upscalers
+*/
+func (c *WrapperClient)GetUpscalers()(Upscalers,error){
+	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/upscalers")
+	if err != nil {
+		return Upscalers{}, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	upscalers := Upscalers{}
+	err = json.Unmarshal(body, &upscalers)
+	return upscalers, err
+}
