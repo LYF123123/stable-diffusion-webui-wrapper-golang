@@ -18,22 +18,32 @@ func getDefaultDataTXT2IMGReq() TXT2IMGReq {
 	return t
 }
 
-// TXT2IMG  Resp
+// TXT2IMG Resp
 type TXT2IMGResp struct {
 	Images []string `json:"images"`
 	Info   string   `json:"info"`
+}
+
+// Upscalers Resp
+type Upscalers []Upscaler
+type Upscaler struct {
+	Name      string `json:"name"`
+	ModelName string `json:"model_name"`
+	ModelPath string `json:"model_path"`
+	ModelUrl  string `json:"model_url"`
+	Scale     float64  `json:"scale"`
 }
 
 // Sd Models resp
 type SDModels []SDModel
 
 type SDModel struct {
-	Title     string  `json:"title"`
-	ModelName string  `json:"model_name"`
+	Title     string `json:"title"`
+	ModelName string `json:"model_name"`
 	Hash      string `json:"hash"`
 	Sha256    string `json:"sha256"`
-	Filename  string  `json:"filename"`
-	Config    string  `json:"config"`
+	Filename  string `json:"filename"`
+	Config    string `json:"config"`
 }
 
 //Hypernetworks Resp
@@ -47,7 +57,7 @@ type Hypernetwork struct {
 type FaceRestorers []FaceRestorer
 
 type FaceRestorer struct {
-	Name   string  `json:"name"`
+	Name   string `json:"name"`
 	CmdDir string `json:"cmd_dir"`
 }
 

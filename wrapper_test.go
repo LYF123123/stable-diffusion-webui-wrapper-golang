@@ -81,3 +81,13 @@ func TestGetHypernetworks(t *testing.T){
 	}
 	t.Log(result)
 }
+
+func TestGetUpscalers(t *testing.T) {
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.GetUpscalers()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result)
+}
