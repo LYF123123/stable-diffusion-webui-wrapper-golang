@@ -5,3 +5,9 @@ Content-Type: application/json
     "prompt": "masterpiece, best quality,Amazing,finely detail,Depth of field,extremely detailed CG unity 8k wallpaper,girl",
     "steps":50
 }
+
+GET http://192.168.1.99:7860/sdapi/v1/memory HTTP/1.1
+
+GET http://192.168.1.99:7860/sdapi/v1/sd-models HTTP/1.1
+
+GET http://192.168.1.99:7860/sdapi/v1/prompt-styles HTTP/1.1
