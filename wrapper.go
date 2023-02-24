@@ -33,10 +33,9 @@ func (c *WrapperClient) SetAPIUrl(apiUrl string) error {
 }
 
 /*
-	Set Proxy
-	eg. http://127.0.0.1:8080
+Set Proxy
+eg. http://127.0.0.1:8080
 */
-
 func (c *WrapperClient) SetProxy(proxyUrl string) error {
 	proxy, err := url.ParseRequestURI(proxyUrl)
 	if err != nil {
@@ -47,10 +46,9 @@ func (c *WrapperClient) SetProxy(proxyUrl string) error {
 }
 
 /*
-	Set prompt, split with ",".
-	return with base64encode image
+Set prompt, split with ",".
+return with base64encode image
 */
-
 func (c *WrapperClient) Text2Img(prompt string) (string, error) {
 	defaultPayload := getDefaultDataTXT2IMGReq()
 	defaultPayload.Prompt = defaultPayload.Prompt + prompt
@@ -70,9 +68,8 @@ func (c *WrapperClient) Text2Img(prompt string) (string, error) {
 }
 
 /*
-	Get Memory Status
+Get Memory Status
 */
-
 func (c *WrapperClient) GetMemory() (MemStatus, error) {
 
 	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/memory")
@@ -87,9 +84,8 @@ func (c *WrapperClient) GetMemory() (MemStatus, error) {
 }
 
 /*
-	Get Sd Models
+Get Sd Models
 */
-
 func (c *WrapperClient) GetSdModels() (SDModels, error) {
 	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/sd-models")
 	if err != nil {
@@ -103,9 +99,9 @@ func (c *WrapperClient) GetSdModels() (SDModels, error) {
 }
 
 /*
-	Get Prompt Styles
+Get Prompt Styles
 */
-func (c *WrapperClient)GetPromptStyles()(PromptStyles,error){
+func (c *WrapperClient) GetPromptStyles() (PromptStyles, error) {
 	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/prompt-styles")
 	if err != nil {
 		return nil, err
@@ -115,4 +111,34 @@ func (c *WrapperClient)GetPromptStyles()(PromptStyles,error){
 	styles := PromptStyles{}
 	err = json.Unmarshal(body, &styles)
 	return styles, err
+}
+
+/*
+Get Realesrgan Models
+*/
+func (c *WrapperClient) GetRealesrganModels() (RealesrganModels, error) {
+	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/realesrgan-models")
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	models := RealesrganModels{}
+	err = json.Unmarshal(body, &models)
+	return models, err
+}
+
+/*
+Get Face Restorers
+*/
+func (c *WrapperClient) GetFaceRestorers() (FaceRestorers, error) {
+	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/face-restorers")
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	restorers := FaceRestorers{}
+	err = json.Unmarshal(body, &restorers)
+	return restorers, err
 }

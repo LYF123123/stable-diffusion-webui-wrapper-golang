@@ -11,3 +11,7 @@ GET http://192.168.1.99:7860/sdapi/v1/memory HTTP/1.1
 GET http://192.168.1.99:7860/sdapi/v1/sd-models HTTP/1.1
 
 GET http://192.168.1.99:7860/sdapi/v1/prompt-styles HTTP/1.1
+
+GET http://192.168.1.99:7860/sdapi/v1/realesrgan-models HTTP/1.1
+
+GET http://192.168.1.99:7860/sdapi/v1/face-restorers HTTP/1.1
