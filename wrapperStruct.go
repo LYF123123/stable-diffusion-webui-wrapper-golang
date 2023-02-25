@@ -6,6 +6,11 @@ type Token struct {
 	User  string `json:"user"`
 }
 
+// App Id Resp
+type AppId struct {
+	AppId uint64 `json:"app_id"`
+}
+
 // TXT2IMG Req
 type TXT2IMGReq struct {
 	Prompt string `json:"prompt"`
