@@ -252,6 +252,23 @@ func (c *WrapperClient) AppId() (AppId, error) {
 	return appId, err
 }
 
+// Reset Iterator
+func (c *WrapperClient) Reset(req ResetReq)(ResetResp,error){
+	b, err := json.Marshal(req)
+	if err != nil {
+		return ResetResp{}, err
+	}
+	resp, err := c.Client.Post(c.ApiUrl+"/reset", "application/json", bytes.NewBuffer(b))
+	if err != nil {
+		return ResetResp{}, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	res := ResetResp{}
+	err = json.Unmarshal(body, &res)
+	return res, err
+}
+
 //!!! Not implemented yet.
 
 func (c *WrapperClient) FetchFile() {
