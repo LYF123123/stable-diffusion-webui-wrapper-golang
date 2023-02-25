@@ -11,6 +11,18 @@ type AppId struct {
 	AppId uint64 `json:"app_id"`
 }
 
+// Reset Iterator Req
+type ResetReq struct {
+	SessionHash string `json:"session_hash"`
+	FnIndex     uint64 `json:"fn_index"`
+}
+
+// Reset Iterator Resp
+
+type ResetResp struct {
+	Success bool `json:"success"`
+}
+
 // TXT2IMG Req
 type TXT2IMGReq struct {
 	Prompt string `json:"prompt"`
