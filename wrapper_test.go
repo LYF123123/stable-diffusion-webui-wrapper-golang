@@ -131,3 +131,13 @@ func TestGetToken(t *testing.T) {
 	}
 	t.Log(result)
 }
+
+func TestAppId(t *testing.T){
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.AppId()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result.AppId)
+}

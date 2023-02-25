@@ -227,8 +227,8 @@ func (c *WrapperClient) LoginCheck() (string, error) {
 }
 
 // Get Token
-func (c *WrapperClient) GetToken() (Token,error){
-	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/cmd-flags")
+func (c *WrapperClient) GetToken() (Token, error) {
+	resp, err := c.Client.Get(c.ApiUrl + "/token")
 	if err != nil {
 		return Token{}, err
 	}
@@ -237,6 +237,19 @@ func (c *WrapperClient) GetToken() (Token,error){
 	token := Token{}
 	err = json.Unmarshal(body, &token)
 	return token, err
+}
+
+// App Id
+func (c *WrapperClient) AppId() (AppId, error) {
+	resp, err := c.Client.Get(c.ApiUrl + "/app_id")
+	if err != nil {
+		return AppId{}, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	appId := AppId{}
+	err = json.Unmarshal(body, &appId)
+	return appId, err
 }
 
 //!!! Not implemented yet.
