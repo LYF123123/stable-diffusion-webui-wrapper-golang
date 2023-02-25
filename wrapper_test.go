@@ -72,7 +72,7 @@ func TestGetEmbedding(t *testing.T) {
 	t.Log(result)
 }
 
-func TestGetHypernetworks(t *testing.T){
+func TestGetHypernetworks(t *testing.T) {
 	c := NewWrapperClient()
 	c.SetAPIUrl("http://192.168.1.99:7860")
 	result, err := c.GetHypernetworks()
@@ -96,6 +96,36 @@ func TestGetCmdFlags(t *testing.T) {
 	c := NewWrapperClient()
 	c.SetAPIUrl("http://192.168.1.99:7860")
 	result, err := c.GetCmdFlags()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result)
+}
+
+func TestGetCurrentUser(t *testing.T) {
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.GetCurrentUser()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result)
+}
+
+func TestLoginCheck(t *testing.T) {
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.LoginCheck()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(result)
+}
+
+func TestGetToken(t *testing.T) {
+	c := NewWrapperClient()
+	c.SetAPIUrl("http://192.168.1.99:7860")
+	result, err := c.GetToken()
 	if err != nil {
 		t.Fatal(err)
 	}

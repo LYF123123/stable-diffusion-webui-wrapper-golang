@@ -23,3 +23,9 @@ GET http://192.168.1.99:7860/sdapi/v1/hypernetworks HTTP/1.1
 GET http://192.168.1.99:7860/sdapi/v1/upscalers HTTP/1.1
 
 GET http://192.168.1.99:7860/sdapi/v1/cmd-flags HTTP/1.1
+
+GET http://192.168.1.99:7860/user HTTP/1.1
+
+GET http://192.168.1.99:7860/login_check HTTP/1.1
+
+GET http://192.168.1.99:7860/token HTTP/1.1
