@@ -3,7 +3,7 @@ package wrapper
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 )
@@ -61,7 +61,7 @@ func (c *WrapperClient) Text2Img(prompt string) (string, error) {
 		return "", err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	res := TXT2IMGResp{}
 	err = json.Unmarshal(body, &res)
 	return res.Images[0], err
@@ -77,7 +77,7 @@ func (c *WrapperClient) GetMemory() (MemStatus, error) {
 		return MemStatus{}, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	status := MemStatus{}
 	err = json.Unmarshal(body, &status)
 	return status, err
@@ -92,7 +92,7 @@ func (c *WrapperClient) GetSdModels() (SDModels, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	models := SDModels{}
 	err = json.Unmarshal(body, &models)
 	return models, err
@@ -107,7 +107,7 @@ func (c *WrapperClient) GetPromptStyles() (PromptStyles, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	styles := PromptStyles{}
 	err = json.Unmarshal(body, &styles)
 	return styles, err
@@ -122,7 +122,7 @@ func (c *WrapperClient) GetRealesrganModels() (RealesrganModels, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	models := RealesrganModels{}
 	err = json.Unmarshal(body, &models)
 	return models, err
@@ -137,7 +137,7 @@ func (c *WrapperClient) GetFaceRestorers() (FaceRestorers, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	restorers := FaceRestorers{}
 	err = json.Unmarshal(body, &restorers)
 	return restorers, err
@@ -153,7 +153,7 @@ func (c *WrapperClient) GetEmbeddings() (Embeddings, error) {
 		return Embeddings{}, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	embeddings := Embeddings{}
 	err = json.Unmarshal(body, &embeddings)
 	return embeddings, err
@@ -168,7 +168,7 @@ func (c *WrapperClient) GetHypernetworks() (Hypernetworks, error) {
 		return Hypernetworks{}, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	hypernetworks := Hypernetworks{}
 	err = json.Unmarshal(body, &hypernetworks)
 	return hypernetworks, err
@@ -183,7 +183,7 @@ func (c *WrapperClient) GetUpscalers() (Upscalers, error) {
 		return Upscalers{}, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	upscalers := Upscalers{}
 	err = json.Unmarshal(body, &upscalers)
 	return upscalers, err
@@ -198,7 +198,7 @@ func (c *WrapperClient) GetCmdFlags() (CmdFlags, error) {
 		return CmdFlags{}, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	cmdFlags := CmdFlags{}
 	err = json.Unmarshal(body, &cmdFlags)
 	return cmdFlags, err
@@ -211,7 +211,7 @@ func (c *WrapperClient) GetCurrentUser() (string, error) {
 		return "", err
 	}
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	return string(body), err
 }
 
@@ -222,7 +222,7 @@ func (c *WrapperClient) LoginCheck() (string, error) {
 		return "", err
 	}
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	return string(body), err
 }
 
@@ -233,7 +233,7 @@ func (c *WrapperClient) GetToken() (Token, error) {
 		return Token{}, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	token := Token{}
 	err = json.Unmarshal(body, &token)
 	return token, err
@@ -246,14 +246,14 @@ func (c *WrapperClient) AppId() (AppId, error) {
 		return AppId{}, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	appId := AppId{}
 	err = json.Unmarshal(body, &appId)
 	return appId, err
 }
 
 // Reset Iterator
-func (c *WrapperClient) Reset(req ResetReq)(ResetResp,error){
+func (c *WrapperClient) Reset(req ResetReq) (ResetResp, error) {
 	b, err := json.Marshal(req)
 	if err != nil {
 		return ResetResp{}, err
@@ -263,7 +263,7 @@ func (c *WrapperClient) Reset(req ResetReq)(ResetResp,error){
 		return ResetResp{}, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	res := ResetResp{}
 	err = json.Unmarshal(body, &res)
 	return res, err
