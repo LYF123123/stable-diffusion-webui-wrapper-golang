@@ -1,5 +1,11 @@
 package wrapper
 
+// Token Resp
+type Token struct {
+	Token string `json:"token"`
+	User  string `json:"user"`
+}
+
 // TXT2IMG Req
 type TXT2IMGReq struct {
 	Prompt string `json:"prompt"`

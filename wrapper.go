@@ -204,6 +204,41 @@ func (c *WrapperClient) GetCmdFlags() (CmdFlags, error) {
 	return cmdFlags, err
 }
 
+// Get Current User
+func (c *WrapperClient) GetCurrentUser() (string, error) {
+	resp, err := c.Client.Get(c.ApiUrl + "/user")
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	return string(body), err
+}
+
+// Login Check
+func (c *WrapperClient) LoginCheck() (string, error) {
+	resp, err := c.Client.Get(c.ApiUrl + "/login_check")
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	return string(body), err
+}
+
+// Get Token
+func (c *WrapperClient) GetToken() (Token,error){
+	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/cmd-flags")
+	if err != nil {
+		return Token{}, err
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	token := Token{}
+	err = json.Unmarshal(body, &token)
+	return token, err
+}
+
 //!!! Not implemented yet.
 
 func (c *WrapperClient) FetchFile() {
@@ -258,34 +293,34 @@ func (c *WrapperClient) Interrogate() {
 	panic("not implemented")
 }
 
-func (c *WrapperClient)Progress() {
+func (c *WrapperClient) Progress() {
 	panic("not implemented")
 }
 
-func (c *WrapperClient)PngInfo(){
+func (c *WrapperClient) PngInfo() {
 	panic("not implemented")
 }
 
-func (c *WrapperClient)ExtrasBatchImages(){
+func (c *WrapperClient) ExtrasBatchImages() {
 	panic("not implemented")
 }
 
-func (c *WrapperClient)ExtrasSingleImage(){
+func (c *WrapperClient) ExtrasSingleImage() {
 	panic("not implemented")
 }
 
-func (c *WrapperClient)Img2Img(){
+func (c *WrapperClient) Img2Img() {
 	panic("not implemented")
 }
 
-func (c *WrapperClient)RobotsTxt(){
+func (c *WrapperClient) RobotsTxt() {
 	panic("not implemented")
 }
 
-func (c *WrapperClient)StartupEvents(){
+func (c *WrapperClient) StartupEvents() {
 	panic("not implemented")
 }
 
-func (c *WrapperClient)GetQueueStatus(){
+func (c *WrapperClient) GetQueueStatus() {
 	panic("not implemented")
 }
