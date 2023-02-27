@@ -47,6 +47,19 @@ type TXT2IMGResp struct {
 	Info   string   `json:"info"`
 }
 
+// IMG2IMG Req
+type IMG2IMGReq struct {
+	Prompt string `json:"prompt"`
+	// Steps  int64  `json:"steps"`	// Not Work
+	InitImages []string `json:"init_images"` // should be base64 encoded
+}
+
+// IMG2IMG Resp 
+type IMG2IMGResp struct {
+	Images []string `json:"images"`
+	Info   string   `json:"info"`
+}
+
 // Cmd Flags Resp
 type CmdFlags struct {
 	DataDir                       string        `json:"data_dir"`

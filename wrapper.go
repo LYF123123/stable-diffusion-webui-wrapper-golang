@@ -68,6 +68,30 @@ func (c *WrapperClient) Text2Img(prompt string) (string, error) {
 }
 
 /*
+Set the initial image which should be base64 encoded
+*/
+func (c *WrapperClient) Img2Img(img string) (string, error) {
+	i := IMG2IMGReq{
+		InitImages: []string{""},
+	}
+	i.InitImages[0] = img
+	b, err := json.Marshal(i)
+	if err != nil {
+		return "", err
+	}
+	resp, err := c.Client.Post(c.ApiUrl+"/sdapi/v1/img2img", "application/json", bytes.NewBuffer(b))
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	body,_ :=io.ReadAll(resp.Body)
+	res:=IMG2IMGResp{}
+	err=json.Unmarshal(body,&res)
+	return res.Images[0],err
+
+}
+
+/*
 Get Memory Status
 */
 func (c *WrapperClient) GetMemory() (MemStatus, error) {
@@ -336,10 +360,6 @@ func (c *WrapperClient) ExtrasBatchImages() {
 }
 
 func (c *WrapperClient) ExtrasSingleImage() {
-	panic("not implemented")
-}
-
-func (c *WrapperClient) Img2Img() {
 	panic("not implemented")
 }
 
