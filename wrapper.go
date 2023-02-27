@@ -110,6 +110,52 @@ func (c *WrapperClient) ExtrasSingleImage(req ExtrasSingleImageReq) (ExtrasSingl
 }
 
 /*
+Get Config
+*/
+func (c *WrapperClient)GetConfig()(ConfigResp,error){
+	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/options")
+	if err != nil {
+		return ConfigResp{}, err
+	}
+	defer resp.Body.Close()
+	body, _ := io.ReadAll(resp.Body)
+	config := ConfigResp{}
+	err = json.Unmarshal(body, &config)
+	return config, err
+}
+
+/*
+Set Stable Diffusion Checkpoint
+@parameter cp: the name of checkpoint in Stable Diffusion Checkpoint int WebUI
+*/
+func (c *WrapperClient) SetStableDiffusionCheckpoint(cp string) error {
+	req:=CheckpointReq{
+		SdModelCheckpoint: cp,
+	}
+	b, err := json.Marshal(req)
+	if err != nil {
+		return err
+	}
+	_, err = c.Client.Post(c.ApiUrl+"/sdapi/v1/options", "application/json", bytes.NewBuffer(b))
+	return err
+
+}
+
+/*
+Get Stable Diffusion Checkpoint
+*/
+func (c *WrapperClient)GetStableDiffusionCheckpoint()(string,error){
+	resp, err := c.Client.Get(c.ApiUrl + "/sdapi/v1/options")
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	body, _ := io.ReadAll(resp.Body)
+	config := ConfigResp{}
+	err = json.Unmarshal(body, &config)
+	return config.SDModelCheckpoint, err
+}
+/*
 Get Memory Status
 */
 func (c *WrapperClient) GetMemory() (MemStatus, error) {
