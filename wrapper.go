@@ -84,11 +84,29 @@ func (c *WrapperClient) Img2Img(img string) (string, error) {
 		return "", err
 	}
 	defer resp.Body.Close()
-	body,_ :=io.ReadAll(resp.Body)
-	res:=IMG2IMGResp{}
-	err=json.Unmarshal(body,&res)
-	return res.Images[0],err
+	body, _ := io.ReadAll(resp.Body)
+	res := IMG2IMGResp{}
+	err = json.Unmarshal(body, &res)
+	return res.Images[0], err
+}
 
+/*
+Extras Single Image
+*/
+func (c *WrapperClient) ExtrasSingleImage(req ExtrasSingleImageReq) (ExtrasSingleImageResp, error) {
+	b, err := json.Marshal(req)
+	if err != nil {
+		return ExtrasSingleImageResp{}, err
+	}
+	resp, err := c.Client.Post(c.ApiUrl+"/sdapi/v1/extra-single-image", "application/json", bytes.NewBuffer(b))
+	if err != nil {
+		return ExtrasSingleImageResp{}, err
+	}
+	defer resp.Body.Close()
+	body, _ := io.ReadAll(resp.Body)
+	res := ExtrasSingleImageResp{}
+	err = json.Unmarshal(body, &res)
+	return res, err
 }
 
 /*
@@ -356,10 +374,6 @@ func (c *WrapperClient) PngInfo() {
 }
 
 func (c *WrapperClient) ExtrasBatchImages() {
-	panic("not implemented")
-}
-
-func (c *WrapperClient) ExtrasSingleImage() {
 	panic("not implemented")
 }
 

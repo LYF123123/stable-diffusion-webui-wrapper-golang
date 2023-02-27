@@ -54,10 +54,34 @@ type IMG2IMGReq struct {
 	InitImages []string `json:"init_images"` // should be base64 encoded
 }
 
-// IMG2IMG Resp 
+// IMG2IMG Resp
 type IMG2IMGResp struct {
 	Images []string `json:"images"`
 	Info   string   `json:"info"`
+}
+
+// Extras Single Image Req
+type ExtrasSingleImageReq struct {
+	ResizeMode                 int64  `json:"resize_mode"`
+	ShowExtrasResults          bool   `json:"show_extras_results"`
+	GfpganVisibility           int64  `json:"gfpgan_visibility"`
+	CodeformerVisibility       int64  `json:"codeformer_visibility"`
+	CodeformerWeight           int64  `json:"codeformer_weight"`
+	UpscalingResize            int64  `json:"upscaling_resize"`
+	UpscalingResizeW           int64  `json:"upscaling_resize_w"`
+	UpscalingResizeH           int64  `json:"upscaling_resize_h"`
+	UpscalingCrop              bool   `json:"upscaling_crop"`
+	Upscaler1                  string `json:"upscaler_1"`
+	Upscaler2                  string `json:"upscaler_2"`
+	ExtrasUpscaler2_Visibility int64  `json:"extras_upscaler_2_visibility"`
+	UpscaleFirst               bool   `json:"upscale_first"`
+	Image                      string `json:"image"`
+}
+
+// Extras Single Image Resp
+type ExtrasSingleImageResp struct {
+	HtmlInfo string `json:"html_info"`
+	Image    string `json:"image"`
 }
 
 // Cmd Flags Resp
