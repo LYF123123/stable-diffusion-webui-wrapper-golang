@@ -26,17 +26,21 @@ type ResetResp struct {
 // TXT2IMG Req
 type TXT2IMGReq struct {
 	Prompt string `json:"prompt"`
+	NegativePrompt string `json:"negative_prompt"`
 	Steps  int64  `json:"steps"`
 	Width  int64  `json:"width"`
 	Height int64  `json:"height"`
+	SamplerName string `json:"sampler_name"`
 }
 
 func getDefaultDataTXT2IMGReq() TXT2IMGReq {
 	t := TXT2IMGReq{
 		Prompt: "masterpiece, best quality,Amazing,finely detail,Depth of field,extremely detailed CG unity 8k wallpaper,",
+		NegativePrompt: "(worst quality:1.25), (low quality:1.25), (lowres:1.1), (monochrome:1.1), (greyscale), multiple views, comic, sketch, (blurry:1.05),",
 		Steps:  50,
 		Width:  512,
 		Height: 512,
+		SamplerName: "DPM++ SDE Karras",
 	}
 	return t
 }
